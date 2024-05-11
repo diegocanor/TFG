@@ -1,0 +1,35 @@
+
+{% extends "base.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock%}
+
+{% block contenido %}
+
+   {% if mensaje %}
+      <h2>{{mensaje}}</h2>
+   {% endif %}
+   <h2> Inicia sesion!<br></h2>
+   
+
+   <div class ="registro">
+      <form action="{{url_for('login')}}" method="post">
+         <p> Correo del usuario:</p>
+         {% if correo %}
+            <input class="text1" name=correo type ="text" value={{correo}} required>
+         {% else %}
+            <input class="text1" name=correo type ="text" required>
+         {% endif %}
+         <p> Contraseña:</p>
+         <input class="text1" name=contrasenna type ="password" required>
+         <p></p>
+         <input class="boton" type ="submit" value="Confirmar">
+      </form>
+
+      <h2>¿Aún no estás registrado?<br></h2>
+      <button onclick="window.location.href='{{url_for('registro_cliente')}}' "class ="boton">Regístrate como cliente</button>
+      <button onclick="window.location.href='{{url_for('registro_conductor')}}' "class ="boton">Regístrate como conductor</button>
+
+   </div>
+{% endblock %}

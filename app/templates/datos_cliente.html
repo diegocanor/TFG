@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock%}
+
+{% block contenido %}
+{% if mensaje %}
+    <h2>{{mensaje}}</h2>
+{% endif %}
+            <div class="detalle">
+                <div class="arriba">
+
+                    <img class="foto" src="../static/imagenes/perfil.png">
+                    <div class="info">
+                        <div><h1>{{ datos['usuario'] }}</h1></div>
+                        <div>
+                            <form action="{{ url_for('modificar') }}" method="post">
+                                <p><span class="etiqueta">Correo electrónico:</span> <input type="text1" name="correo" type ="mail" id="email" required value="{{ datos['correo'] }}"></p>
+                                <p><span class="etiqueta">DNI:</span> {{ datos['DNI'] }}</p>
+                                <p><span class="etiqueta">Teléfono:</span> <input type="text1" name="telefono" id="telefono" required value="{{ datos['telefono'] }}"></p>
+                                <p><span class="etiqueta">Tarjeta:</span> {{ datos['tarjeta'] }}</p>
+                                <button type="submit" class="boton">Guardar Cambios</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <script type='text/javascript'>
+
+                function validar(){
+                
+                   var todo_correcto = true;
+                
+                    //---------------------------------------
+                   if(document.getElementById('nombre').value.length < 2 ){
+                      alert('El nombre introducido es demasiado corto');
+                      todo_correcto = false;
+                   }
+                   if(permite(document.getElementById('nombre').value) == false){
+                
+                      alert('El usuario introducido contiene caracteres no permitidos');
+                      todo_correcto = false;
+                   }
+                
+                   //---------------------------------------
+                   if(document.getElementById('contrasenna').value.length < 8 ){
+                      alert('La contraseña es demasiado corta');
+                      todo_correcto = false;
+                   }
+                
+                   if(document.getElementById('contrasenna').value != document.getElementById('contrasenna2').value){
+                       alert('Las contraseñas no coinciden');
+                       todo_correcto = false;
+                   }
+                
+                   //---------------------------------------
+                   var email = document.getElementById('email').value
+                   var patron=/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,4})+$/;
+                   if (email.search(patron) != 0) {
+                      alert('El email introducido no es correcto');
+                      todo_correcto = false;
+                   }
+                
+                   //---------------------------------------
+                   var telefono = document.getElementById('telefono').value;
+                   var patron = /^[0-9]{9}$/;
+                
+                   if (!patron.test(telefono)) {
+                      alert('El número de teléfono introducido no es válido');
+                      todo_correcto = false;
+                   }
+                
+                   return todo_correcto;
+                }
+                
+                function permite(string){
+                
+                    var filtro = 'abcdefghijklmnñopqrstuvwxyzABCDEFGHIJKLMNÑOPQRSTUVWXYZ1234567890';
+                
+                    for (var i=0; i<string.length; i++)
+                       if (filtro.indexOf(string.charAt(i)) == -1)
+                         return false;
+                    return true;
+                }
+                
+                
+                </script>
+{% endblock %}

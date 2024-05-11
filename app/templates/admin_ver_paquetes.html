@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}Ver Paquetes{% endblock %}
+
+{% block contenido %}
+<h2>Lista de Paquetes</h2>
+<div>
+  <ul>
+    {% for paquete in paquetes %}
+    <li>
+        <strong>Usuario:</strong> {{ paquete.get('Usuario', 'N/A') }}<br>
+        <strong>Conductor:</strong> {{ paquete.get('Conductor', 'N/A') }}<br>
+        <strong>Peso:</strong> {{ paquete.get('Peso', 'N/A') }}<br>
+        <strong>Tamaño:</strong> {{ paquete.get('Tamaño', 'N/A') }}<br>
+        <strong>Forma:</strong> {{ paquete.get('Forma', 'N/A') }}<br>
+        <strong>Origen:</strong> {{ paquete.get('Origen', 'N/A') }}<br>
+        <strong>Destino:</strong> {{ paquete.get('Destino', 'N/A') }}<br>
+        <strong>Fecha y hora de recogida:</strong> {{ paquete.get('Fecha y hora de recogida', 'N/A') }}<br>
+        <strong>Descripción:</strong> {{ paquete.get('Descripción', 'N/A') }}<br>
+        --------------------------------------------------------------<br>
+    </li>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

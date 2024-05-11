@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+
+<html lang="es" dir="ltr">
+<head>
+   <meta charset="UTF-8">
+   <link href="https://fonts.googleapis.com/css?family=Josefin+Slab&display=swap" rel="stylesheet">
+   <link href="https://fonts.googleapis.com/css?family=Montserrat+Alternates&display=swap" rel="stylesheet">
+   <link rel="stylesheet" type="text/css" href="{{ url_for("static", filename='style.css')}}">
+   <link rel="icon" href="{{url_for("static", filename= 'imagenes/logo2.png')}}" >
+   <link rel="stylesheet" href="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v6.4.3/css/ol.css" type="text/css">
+   <link href="https://fonts.googleapis.com/css?family=Open+Sans:400,600|Roboto:400,700&display=swap" rel="stylesheet">
+    
+   <title> {% block title %} {% endblock %} - DriTrust</title>
+   <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script> 
+   <script src="https://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+   <script src="https://cdn.rawgit.com/openlayers/openlayers.github.io/master/en/v6.4.3/build/ol.js"></script>
+   <script src="https://cdn.jsdelivr.net/npm/ol@6.5.0/dist/ol.js"></script>
+   
+</head>
+
+<body>
+
+  <div id="contenedor">
+    <div id="cabecera">
+        <div><a href="{{url_for('index')}}"><img id="logo" src ="{{url_for("static", filename= 'imagenes/logo.png')}}" alt="Logo"></a></div>
+        <div><h1 style="font-size: 50px;">DriTrust</h1></div>
+        <div class = "infoDiv">
+            <div class = "contacto">
+                <a href="https://github.com/diegocanor/TFG.git"><img class="icono" src ="{{url_for("static", filename= 'imagenes/git.png')}}" alt="git"></a>
+                <a href="https://www.instagram.com/"><img class="icono" src ="{{url_for("static", filename= 'imagenes/ig.png')}}" alt = "ig"></a>
+        
+            </div>
+        </div>
+	 
+    </div>
+
+
+    <div id="menu">
+    {% if not session['usuario'] %}
+  		<ul>
+  			<li><a href="{{url_for('index')}}">Inicio</a></li>
+  			<li><a href="{{url_for('registro_cliente')}}">Registrarse como cliente</a></li>
+              <li><a href="{{url_for('registro_conductor')}}">Registrarse como conductor</a></li>
+  			<li><a href="{{url_for('login')}}">Login</a></li>
+  		</ul>
+          <div id="logoDriTrust">
+            <img src="../static/imagenes/portada3.png">
+          </div>
+    {% else %}
+      <h4>Bienvenido:  {{ session['usuario'] }}</h4>
+        <ul>
+          <li><a href="{{url_for('index')}}">Inicio</a></li>
+          <li><a href="{{url_for('logout')}}">Logout</a></li>
+          {% if session['roll'] == 'cliente' %}
+          <li><a href="{{url_for('index')}}">Página principal cliente</a></li>
+          <li><a href="{{url_for('informacion')}}">Datos Cliente</a></li>
+          <li><a href="{{url_for('inicio_viaje')}}">Iniciar viaje</a></li>
+          <li><a href="{{url_for('envio_paquete')}}">Iniciar envio paquete</a></li>
+          {% elif session['roll'] == 'conductor' %}
+          <li><a href="{{url_for('index')}}">Página principal conductor</a></li>
+          <li><a href="{{url_for('index')}}">Actualizar Datos Personales</a></li>
+          <li><a href="{{url_for('index')}}">Viajes Disponibles</a></li>
+          <li><a href="{{url_for('index')}}">Mis Viajes Actuales</a></li>
+          <li><a href="{{url_for('index')}}">Historial de Viajes</a></li>
+          <li><a href="{{url_for('index')}}">Envíos Disponibles</a></li>
+          <li><a href="{{url_for('index')}}">Mis Envíos Actuales</a></li>
+          <li><a href="{{url_for('index')}}">Ganancias y Pagos</a></li>
+          <li><a href="{{url_for('index')}}">Estadísticas de Ganancias</a></li>
+          {% elif session['roll'] == 'admin' %}
+          <li><a href="{{url_for('index')}}">Dashboard Administrador</a></li>
+          <li><a href="{{url_for('admin_ver_usuarios')}}">Ver Usuarios</a></li>
+          <li><a href="{{url_for('admin_ver_viajes')}}">Ver Viajes</a></li>
+          <li><a href="{{url_for('admin_ver_paquetes')}}">Ver Paquetes</a></li>
+          {% endif %}
+      </ul>
+      <div id="logoDriTrust">
+        <img src="../static/imagenes/portada3.png">
+      </div>
+    {% endif %}
+	</div>
+
+   <div id="contenido">
+     {% block contenido %}
+     {% endblock %}
+   </div>
+
+    <div id="pie">
+      <p class= "etiqueta">&copy; 2023 | DriTrust S.L.</p>
+    </div>
+  </div>
+
+</body>
+</html>

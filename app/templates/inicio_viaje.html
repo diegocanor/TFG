@@ -1,0 +1,36 @@
+<!DOCTYPE HTML>
+{% extends "base.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock%}
+
+{% block contenido %}
+{% if mensaje %}
+    <h2>{{mensaje}}</h2>
+{% else %}
+    <h2> Inicia un viaje<br></h2>
+{% endif %}
+
+<div class ="inicio_viaje">
+
+    <form action="{{ url_for('inicio_viaje') }}" method="post">
+        <p>Origen:</p>
+        <input class="text1" name="origen" type="text" id="origen" required>
+  
+        <p>Destino:</p>
+        <input class="text1" name="destino" type="text" id="destino" required>
+  
+        <p>Vehículo:</p>
+        <select class="text1" name="vehiculo" id="vehiculo" required>
+           <option value="Coche electrico">Coche eléctrico</option>
+           <option value="Bicicleta">Bicicleta</option>
+           <option value="Moto">Moto</option>
+        </select>
+  
+        <p></p>
+        <input class="boton" type="submit" value="Confirmar">
+     </form>
+
+</div>
+{% endblock %}

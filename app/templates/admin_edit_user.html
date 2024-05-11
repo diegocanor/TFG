@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}Editar Usuario{% endblock %}
+
+{% block contenido %}
+<h2>Editar Usuario</h2>
+<form action="{{ url_for('admin_edit_user', tipo=tipo, correo=correo) }}" method="post">
+    <div>
+        <label for="nombre">Nombre:</label>
+        <input type="text" id="nombre" name="nombre" value="{{ datos['usuario'] }}" required>
+    </div>
+    <div>
+        <label for="dni">DNI:</label>
+        <input type="text" id="dni" name="dni" value="{{ datos['DNI'] }}" required>
+    </div>
+    <div>
+        <label for="telefono">Teléfono:</label>
+        <input type="text" id="telefono" name="telefono" value="{{ datos['telefono'] }}" required>
+    </div>
+    <div>
+        <label for="contrasenna">Contraseña:</label>
+        <input type="password" id="contrasenna" name="contrasenna" required>
+    </div>
+    <div>
+        <label for="roll">Rol:</label>
+        <select id="roll" name="roll">
+        <option value="cliente" {% if datos['roll'] == 'cliente' %}selected{% endif %}>Cliente</option>
+        <option value="conductor" {% if datos['roll'] == 'conductor' %}selected{% endif %}>Conductor</option>
+        </select>
+    </div>
+    <button type="submit">Actualizar Usuario</button>
+</form>
+{% endblock %}

@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}Ver Viajes{% endblock %}
+
+{% block contenido %}
+<h2>Lista de Viajes</h2>
+<div>
+  <ul>
+    {% for viaje in viajes %}
+    <li>
+      <strong>Usuario:</strong> {{ viaje.get('Usuario', 'N/A') }}<br>
+      <strong>Conductor:</strong> {{ viaje.get('Conductor', 'N/A') }}<br>
+      <strong>Origen:</strong> {{ viaje.get('Origen', 'N/A') }}<br>
+      <strong>Destino:</strong> {{ viaje.get('Destino', 'N/A') }}<br>
+      <strong>Vehículo:</strong> {{ viaje.get('Vehículo', 'N/A') }}<br>
+      --------------------------------------------------------------<br>
+    </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

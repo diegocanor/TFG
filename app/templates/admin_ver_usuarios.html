@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block title %}Ver Usuarios{% endblock %}
+
+{% block contenido %}
+<h2>Lista de Usuarios</h2>
+<div>
+  <h3>Clientes</h3>
+  <ul>
+    {% for cliente in clientes %}
+      <li>{{ cliente }}
+        <a href="{{ url_for('admin_edit_user', tipo='clientes', correo=cliente) }}">Editar</a>
+        <a href="{{ url_for('admin_delete_user', tipo='clientes', correo=cliente) }}" onclick="return confirm('¿Estás seguro de querer eliminar este cliente?');">Eliminar</a>
+      </li>
+    {% endfor %}
+  </ul>
+  <h3>Conductores</h3>
+  <ul>
+    {% for conductor in conductores %}
+      <li>{{ conductor }}
+        <a href="{{ url_for('admin_edit_user', tipo='conductores', correo=conductor) }}">Editar</a>
+        <a href="{{ url_for('admin_delete_user', tipo='conductores', correo=conductor) }}" onclick="return confirm('¿Estás seguro de querer eliminar este conductor?');">Eliminar</a>
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+{% endblock %}

@@ -1,0 +1,46 @@
+<!DOCTYPE HTML>
+{% extends "base.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock%}
+
+{% block contenido %}
+{% if mensaje %}
+    <h2>{{mensaje}}</h2>
+{% else %}
+    <h2> Inicia un viaje<br></h2>
+{% endif %}
+
+<div class ="inicio_viaje">
+
+    <form action="{{ url_for('envio_paquete') }}" method="post">
+        <p>Peso del paquete (kg):</p>
+        <input class="text1" name="peso" type="number" step="0.01" required>
+
+        <p>Tamaño del paquete (m²):</p>
+        <input class="text1" name="tamano" type="number" step="0.01" required>
+
+        <p>Forma del paquete:</p>
+        <input class="text1" name="forma" type="text" required>
+
+        <p>Origen:</p>
+        <input class="text1" name="origen" type="text" required>
+
+        <p>Destino:</p>
+        <input class="text1" name="destino" type="text" required>
+
+        <p>Fecha y hora de recogida:</p>
+        <input class="text1" name="fecha_hora" type="datetime-local" required>
+
+        <p>Descripción del paquete:</p>
+        <textarea class="text1" name="descripcion" required></textarea>
+
+        <p></p>
+
+        <input class="boton_paquete" type="submit" value="Enviar paquete">
+
+     </form>
+
+</div>
+{% endblock %}

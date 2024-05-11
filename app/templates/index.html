@@ -1,0 +1,91 @@
+<!DOCTYPE HTML>
+{% extends "base.html" %}
+
+{% block title %}
+    {{ title }}
+{% endblock%}
+
+{% block contenido %}
+   <h3>Bienvenido a tu aplicación de confianza</h3>
+   <div class=contenidoIndex>
+        <div id="map"></div>
+        <div id ="info1">
+            <h2 style="background-color: rgb(14, 13, 13); color: rgb(212, 209, 202); font-size: 40pt;">CONÓCENOS</h2>
+            <img src="../static/imagenes/portada1.png" width=100%>
+            <strong><p style="margin-left: 5%; font-size: 30px; margin-right: 5%;">Ayuda al mundo en el que vives.</p></strong>
+            <p style="margin-left: 5%; font-size: 20px; margin-right: 5%;">
+                En DriTrust trabajamos para mejorar el munndo de una manera sostenible, nuestro principal objetivo es cambiar el mundo tal y como lo conocemos.<br>
+            </p>
+            <img src="../static/imagenes/portada2.png" width=100%>
+            <strong><p style="margin-left: 5%; font-size: 30px; margin-right: 5%;">Cuenta con los mejores expertos.</p></strong>
+            <p style="margin-left: 5%; font-size: 20px; margin-right: 5%;">
+                En DriTrust tendrás un trato personalizado como siempre has querido, contamos con trabajadores de confianza con los que tendrás la mejor experiencia del mercado.<br>
+            </p>
+        </div>
+        <div id ="info2">
+            <h2 style="background-color: rgb(14, 13, 13); color: rgb(212, 209, 202); font-size: 40pt;">ÚNETE COMO CONDUCTOR</h2>
+            <h2 style="background-color: rgb(208, 198, 198);">Crea tu propio horario sin restricciones y sientete cómodo para trabajr el número de horas que quieras.</h2>
+            <h2 style="background-color: rgb(208, 198, 198);">Coge tu propio vehículo sostenible y ayuda al medio ambiente.</h2>
+            <h2 style="background-color: rgb(208, 198, 198);">Realiza repartos por toda tu ciudad de forma rápida y sencilla.</h2>
+            <h2 style="background-color: rgb(208, 198, 198);">Lleva a todos nuestros clientes desde el origen que elijan hasta el destino deseado sin contaminar.</h2>
+            <h2 style="background-color: rgb(208, 198, 198);">Únete cuando quieras sin ningún compromiso.</h2>
+        </div>
+        <div id ="info3">
+            <h2 style="background-color: rgb(14, 13, 13); color: rgb(212, 209, 202); font-size: 40pt;">UNETE COMO CLIENTE</h2><br>
+            <h2 style="background-color: rgb(208, 198, 198);">COMODIDAD Y ACCESIBILIDAD</h2>
+            <h2 style="background-color: rgb(208, 198, 198);">VARIEDAD DE OPCIONES DE VIAJE</h2>
+            <h2 style="background-color: rgb(208, 198, 198);">TRANSPARENCIA EN LOS PRECIOS</h2>
+            <h2 style="background-color: rgb(208, 198, 198);">SEGURIDAD Y TRANQUILIDAD</h2>
+            <h2 style="background-color: rgb(208, 198, 198);">DISPONIBILIDAD 24 HORAS</h2>
+        </div>
+   </div>
+   <script>
+    var map = new ol.Map({
+      target: 'map',
+      layers: [
+        new ol.layer.Tile({
+          source: new ol.source.OSM(),
+        }),
+      ],
+      view: new ol.View({
+        center: ol.proj.fromLonLat([-3.70327, 40.4168]),
+        zoom: 13,
+      }),
+    });
+
+    var locations = [];
+    for (var i = 0; i < 20; i++) {
+      var lat = 40.4168 + (Math.random() - 0.5) / 10;
+      var lon = -3.70327 + (Math.random() - 0.5) / 10;
+      locations.push([lon, lat]);
+    }
+
+    var vectorSource = new ol.source.Vector();
+    for (var i = 0; i < locations.length; i++) {
+      var marker = new ol.Feature({
+        geometry: new ol.geom.Point(ol.proj.fromLonLat(locations[i])),
+      });
+
+      marker.setStyle(
+        new ol.style.Style({
+          image: new ol.style.Icon({
+            anchor: [0.5, 0.5],
+            anchorXUnits: 'fraction',
+            anchorYUnits: 'fraction',
+            src: '../static/imagenes/car.png',
+            scale: 0.15,
+          }),
+        })
+      );
+
+      vectorSource.addFeature(marker);
+    }
+
+    var vectorLayer = new ol.layer.Vector({
+      source: vectorSource,
+    });
+
+    map.addLayer(vectorLayer);
+  </script>
+   
+{% endblock %}
