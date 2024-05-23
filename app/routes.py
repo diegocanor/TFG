@@ -271,6 +271,7 @@ def inicio_viaje():
         usuario = session['correo']
         origen = request.form['origen']
         destino = request.form['destino']
+        fecha = request.form['fecha']
         vehiculo = request.form['vehiculo']
 
         with open(cadena_datos, 'a') as f:
@@ -278,6 +279,7 @@ def inicio_viaje():
             f.write(f"Conductor: \n")
             f.write(f"Origen: {origen}\n")
             f.write(f"Destino: {destino}\n")
+            f.write(f"Fecha Prevista: {fecha}\n")
             f.write(f"Vehículo: {vehiculo}\n")
             f.write(f"------------------------\n")
 
